@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-import {mainRouter} from "../routes/main.router";
 
 export class UserController {
     async information(req: Request, res: Response) {

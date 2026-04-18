@@ -1,13 +1,33 @@
 import { Request, Response} from 'express'
+import AuthService from '../services/auth.service.js'
 
 class AuthController {
     async register(req: Request, res: Response) {
-        const { name, password, email, age } = req.body
-        res.status(200).json({name, password, email, age})
+        try {
+            const newUser = await AuthService.register(
+                req.body.name,
+                req.body.password,
+                req.body.email,
+                req.body.age
+            )
+
+            res.status(201).json(newUser)
+        } catch (error: any) {
+            res.status(400).json({ message: error.message })
+        }
     }
 
     async login(req: Request, res: Response) {
-        const {name, password} = req.body
+        try {
+            const result = await AuthService.login(
+                req.body.name,
+                req.body.password
+            )
+
+            res.status(201).json(result)
+        } catch (error: any) {
+            res.status(400).json({ message: error.message })
+        }
     }
 }
 

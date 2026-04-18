@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc -w",
     "start": "nodemon dist/index.js"
@@ -11,12 +12,19 @@
   "author": "Snekchyk",
   "license": "MIT",
   "dependencies": {
-    "express": "^5.2.1"
+    "@prisma/adapter-pg": "^7.7.0",
+    "@prisma/client": "^7.7.0",
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.5.2",
     "nodemon": "^3.1.14",
+    "prisma": "^7.7.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2"
   }
