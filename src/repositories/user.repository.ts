@@ -1,14 +1,15 @@
-import prisma from '../db.js' // Імпортуємо наш створений клієнт
+import prisma from '../db.js'
+import { Prisma, Users } from "@prisma/client"; // Імпортуємо наш створений клієнт
 
 class UserRepository {
-    async save(user: any) {
-        return prisma.users.create({
+    async save(user: Prisma.UsersCreateInput) {
+        prisma.users.create({
             data: user
         })
     }
 
 
-    async isEmailAvailable(email: string) {
+    async isEmailAvailable(email: string): Promise<boolean> {
         const isAvailable = await prisma.users.findUnique({
             where: {
                 email: email
@@ -18,7 +19,7 @@ class UserRepository {
     }
 
 
-    async isNameAvailable(name: string) {
+    async isNameAvailable(name: string): Promise<boolean> {
         const isAvailable = await prisma.users.findUnique({
             where: {
                 name: name
@@ -28,7 +29,7 @@ class UserRepository {
     }
 
 
-    async findUserByName(name:  string) {
+    async findUserByName(name:  string): Promise<Users | null> {
         return prisma.users.findUnique({
             where: {
                 name: name
