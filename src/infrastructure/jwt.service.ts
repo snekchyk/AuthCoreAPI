@@ -9,6 +9,15 @@ class JwtService {
         console.log(token)
         return token
     }
+
+    async getUserIdByToken(token: string) {
+        try {
+            const result: any = jwt.verify(token, key)
+            return result.userId
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export default new JwtService()

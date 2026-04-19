@@ -33,6 +33,8 @@ class AuthService {
 
         await UserRepository.save(newUser)
 
+        console.log(newUser)
+
         const user = await UserQueryRepository.findByEmail(newUser.email)
 
         if (!user) {

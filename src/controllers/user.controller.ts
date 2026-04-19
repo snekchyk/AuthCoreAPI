@@ -1,8 +1,11 @@
 import { Request, Response } from 'express'
+import UserService from "../services/user.service.js";
 
 export class UserController {
     async information(req: Request, res: Response) {
-        return
+        const information = await UserService.getInformation(req.user.email)
+
+        res.json(information)
     }
 
     async update(req: Request, res: Response) {

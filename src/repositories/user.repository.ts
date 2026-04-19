@@ -3,7 +3,7 @@ import { Prisma, Users } from "@prisma/client"; // Імпортуємо наш �
 
 class UserRepository {
     async save(user: Prisma.UsersCreateInput) {
-        prisma.users.create({
+        await prisma.users.create({
             data: user
         })
     }
@@ -33,6 +33,14 @@ class UserRepository {
         return prisma.users.findUnique({
             where: {
                 name: name
+            }
+        })
+    }
+
+    async findUserById(id:  string): Promise<Users | null> {
+        return prisma.users.findFirst({
+            where: {
+                id: id
             }
         })
     }
