@@ -14,8 +14,14 @@ export class UserController {
         res.status(200).json(information)
     }
 
-    async update(req: Request, res: Response) {
-        return
+    async update(req: RequestWithUser, res: Response) {
+        const { name, age } = req.body
+        console.log(req.user)
+        const id = req.user.id
+        console.log(id)
+
+        const updatedUser = await UserService.updateUser(id, {name, age})
+        return res.status(201).json(updatedUser)
     }
 
     async delete(req: Request, res: Response) {

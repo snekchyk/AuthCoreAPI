@@ -44,6 +44,18 @@ class UserRepository {
             }
         })
     }
+
+    async updateUserById(id: string, data: { name: string, age: number }) {
+        return prisma.users.update({
+            where: { id },
+            data: data,
+            select: {
+                name: true,
+                age: true,
+                email: true
+            }
+        })
+    }
 }
 
 export default new UserRepository()

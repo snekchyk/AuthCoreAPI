@@ -23,6 +23,10 @@ class AuthService {
         }
         return user
     }
+
+    async updateUser(id: string, data: { name: string, age: number }) {
+        return await UserRepository.updateUserById(id, data)
+    }
 }
 
 export default new AuthService()
