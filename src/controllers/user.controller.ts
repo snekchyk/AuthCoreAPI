@@ -4,8 +4,11 @@ import UserService from "../services/user.service.js";
 export class UserController {
     async information(req: Request, res: Response) {
         const information = await UserService.getInformation(req.user.email)
+        if (!information) {
+            res.sendStatus(404)
+        }
 
-        res.json(information)
+        res.status(200).json(information)
     }
 
     async update(req: Request, res: Response) {

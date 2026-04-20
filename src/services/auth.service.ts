@@ -10,6 +10,10 @@ import {LoginInputModel} from "../models/input/LoginInputModel.js";
 
 class AuthService {
     async register(data: RegistrationInputModel): Promise<UserViewModel> {
+        if (!data.name || !data.email || !data.password || !data.age) {
+            throw new Error('Missing required fields')
+        }
+
         const isEmailAvailable = await UserRepository.isEmailAvailable(data.email)
         const isNameAvailable = await UserRepository.isNameAvailable(data.name)
 
