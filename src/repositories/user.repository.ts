@@ -64,6 +64,21 @@ class UserRepository {
             }
         })
     }
+    
+    async getAllUsers(): Promise<Users[] | null> {
+        return prisma.users.findMany()
+    }
+
+    async updateRole(id: string): Promise<Users> {
+            return prisma.users.update({
+            where: {
+                id: id
+            },
+            data: {
+                role: "ADMIN"
+            }
+        })
+    }
 }
 
 export default new UserRepository()
