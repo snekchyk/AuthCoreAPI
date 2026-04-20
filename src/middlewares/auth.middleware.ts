@@ -14,18 +14,18 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
 
     try {
         userId = await jwtService.getUserIdByToken(token as string)
+
+        if (userId) {
+            req.user = await UserService.getUserById(userId)
+
+            return next()
+        }
+
     } catch (error: any) {
         res.status(401).send({message: error.message})
         return
     }
 
-
-    if (userId) {
-        req.user = await UserService.getUserById(userId)
-
-        next()
-        return
-    }
 
     res.sendStatus(401)
 }
