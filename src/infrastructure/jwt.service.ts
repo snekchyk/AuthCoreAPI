@@ -15,7 +15,7 @@ class JwtService {
             const result: any = jwt.verify(token, key)
             return result.userId
         } catch (error) {
-            throw error
+            throw new Error("Unable to verify JWT token")
         }
     }
 }
