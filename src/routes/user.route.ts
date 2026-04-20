@@ -6,6 +6,6 @@ const userRouter = Router()
 
 userRouter.get('/information', authMiddleware, userController.information)
 userRouter.patch('/update', authMiddleware, userController.update)
-userRouter.delete('/delete', userController.delete)
+userRouter.delete('/delete', authMiddleware, userController.delete)
 
 export { userRouter }

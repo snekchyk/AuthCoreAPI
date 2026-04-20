@@ -27,6 +27,11 @@ class AuthService {
     async updateUser(id: string, data: { name: string, age: number }) {
         return await UserRepository.updateUserById(id, data)
     }
+
+    async deleteUser(id: string) {
+        return UserRepository.deleteUserById(id)
+    }
+
 }
 
 export default new AuthService()

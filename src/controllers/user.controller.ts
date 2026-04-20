@@ -14,18 +14,25 @@ export class UserController {
         res.status(200).json(information)
     }
 
-    async update(req: RequestWithUser, res: Response) {
+    async update(req: RequestWithUser, res: Response<UserViewModel>) {
         const { name, age } = req.body
-        console.log(req.user)
         const id = req.user.id
-        console.log(id)
 
         const updatedUser = await UserService.updateUser(id, {name, age})
         return res.status(201).json(updatedUser)
     }
 
-    async delete(req: Request, res: Response) {
-        return
+    async delete(req: RequestWithUser, res: Response) {
+        const id = req.user.id
+
+        try {
+            await UserService.deleteUser(id)
+        } catch (error) {
+            res.sendStatus(400)
+        }
+
+        res.sendStatus(204)
+
     }
 }
 

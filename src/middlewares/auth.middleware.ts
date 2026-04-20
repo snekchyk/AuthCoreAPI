@@ -8,7 +8,6 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         return
     }
 
-    console.log(1)
 
     const token = req.headers.authorization.split(' ')[1]
     let userId: string | null = null
