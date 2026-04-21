@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken"
 import {Users} from "@prisma/client";
+import dotenv from "dotenv"
 
-const key = "123"
+dotenv.config()
 
+const key = process.env.JWT_ACCESS_SECRET || "fallback"
 class JwtService {
     async generate(user: Users) {
         const token = jwt.sign({userId: user.id}, key, {expiresIn: "1d"})
