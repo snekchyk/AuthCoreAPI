@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken"
+import jwt, {JwtPayload} from "jsonwebtoken"
 import {Users} from "@prisma/client";
 import dotenv from "dotenv"
 
@@ -13,7 +13,7 @@ class JwtService {
 
     async getUserIdByToken(token: string) {
         try {
-            const result: any = jwt.verify(token, key)
+            const result = jwt.verify(token, key) as JwtPayload & { userId: string };
             return result.userId
         } catch (error) {
             throw new Error("Unable to verify JWT token")

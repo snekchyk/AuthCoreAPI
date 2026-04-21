@@ -7,6 +7,7 @@ import {RegistrationInputModel} from "../models/input/RegistrationInputModel.js"
 import {UserViewErrorModel} from "../models/view/UserViewErrorModel.js";
 import {UserViewAccessStringModel} from "../models/view/UserViewAccessStringModel.js";
 import {LoginInputModel} from "../models/input/LoginInputModel.js";
+import {toUserView} from "../infrastructure/toUserView.js";
 
 class AuthService {
     async register(data: RegistrationInputModel): Promise<UserViewModel> {
@@ -37,8 +38,6 @@ class AuthService {
 
         await UserRepository.save(newUser)
 
-        console.log(newUser)
-
         const user = await UserQueryRepository.findByEmail(newUser.email)
 
         if (!user) {
@@ -61,9 +60,8 @@ class AuthService {
         }
 
         const token = await JwtService.generate(user)
-        console.log(token)
 
-        const payload = await UserQueryRepository.findByEmail(user.email)
+        const payload = toUserView(user)
         if (!payload) {
             throw new Error('Invalid username or password')
         }
